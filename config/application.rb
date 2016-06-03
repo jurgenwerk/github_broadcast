@@ -12,6 +12,13 @@ module GithubBroadcast
   class Application < Rails::Application
     config.active_job.queue_adapter = :sidekiq
 
+    config.middleware.insert_before 0, "Rack::Cors" do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :options]
+      end
+    end
+
     Mongoid.logger.level = Logger::ERROR
     Mongo::Logger.logger.level = Logger::ERROR
   end

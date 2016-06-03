@@ -1,3 +1,3 @@
 Github.configure do |c|
-  c.oauth_token = ENV["github_token"]
+  c.oauth_token = ""
 end

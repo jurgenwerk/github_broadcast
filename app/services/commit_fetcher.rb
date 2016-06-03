@@ -2,10 +2,9 @@ class CommitFetcher
 
   def self.fetch_and_save
     delete_old
-    events = Github.new.activity.events.public(per_page: 45).map{ |e| [e.id, e.created_at, e.actor.login] }
-    commits = []
+    events = Github.new(basic_auth: TokenMaster.get_token).activity.events.public(per_page: 40).map{ |e| [e.id, e.created_at, e.actor.login] }
     events.each do |event|
-      commits.push(Commit.create(event_id: event[0], commit_time: event[1], author: event[2]))
+      Commit.create(event_id: event[0], commit_time: event[1], author: event[2])
     end
   end
 
