@@ -5,16 +5,20 @@ require 'sidekiq/api'
 
 module Clockwork
 
-  every(8.seconds, "[#{DateTime.now.to_s}] Fetching commits") do
+  every(5.seconds, "[#{DateTime.now.to_s}] Fetching commits") do
     CommitFetcher.fetch_and_save
   end
 
-  every(9.seconds, "[#{DateTime.now.to_s}] Resolve locations") do
+  every(7.seconds, "[#{DateTime.now.to_s}] Resolve locations") do
     CommitFetcher.resolve_locations
   end
 
   every(2.seconds, "[#{DateTime.now.to_s}] Resolve locations") do
     CommitFetcher.resolve_locations
+  end
+
+  every(30.seconds, "[#{DateTime.now.to_s}] Fetching commits") do
+    CommitFetcher.delete_old
   end
 
   every(1.minute, "[#{DateTime.now.to_s}] Clear queue") do

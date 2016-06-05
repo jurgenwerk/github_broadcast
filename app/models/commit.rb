@@ -12,13 +12,14 @@ class Commit
   field :longitude, type: String
   field :latitude, type: String
 
+  index({ event_id: 1 }, { unique: true, name: "event_id_index" })
+
   before_update :publish
 
   def publish
     if resolved && author_location && author_location_changed?
-      firehose ||= Firehose::Client::Producer::Http.new(ENV['FIREHOSE_URL'])
       obj = attributes.slice(:event_id, :author_location, :commit_time, :latitude, :longitude)
-      firehose.publish(obj.to_json).to("/github_broadcast")
+      ActionCable.server.broadcast("radar_channel", obj)
     end
   end
 end

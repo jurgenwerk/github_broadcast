@@ -22,6 +22,6 @@ class ResolveLocationJob < ActiveJob::Base
         commit.update(resolving_location: false, resolved: true, author_location: location, latitude: latitude, longitude: longitude)
       end
     end
-    puts "Resolving location took #{time}"
+    # puts "Resolving location took #{time}"
   end
 end
