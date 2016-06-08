@@ -1,5 +1,5 @@
 # This file is used by Rack-based servers to start the application.
 
 require ::File.expand_path('../config/environment', __FILE__)
-ActionCable.server.config.allowed_request_origins = ["http://localhost:4200"]
+ActionCable.server.config.disable_request_forgery_protection = true
 run Rails.application
