@@ -7,9 +7,15 @@ gem 'mongoid', git: 'https://github.com/mongodb/mongoid.git'
 gem 'bson_ext'
 gem 'sidekiq'
 gem 'clockwork'
-gem 'pry'
 gem 'puma'
 gem 'redis'
-gem 'foreman'
 gem 'rack-cors', require: 'rack/cors'
-gem 'mina'
+
+group :development do
+  gem 'pry'
+  gem 'foreman'
+  gem 'meta_request'
+  gem 'mina'
+  gem 'mina-extras'
+  gem 'mina-sidekiq'
+end
