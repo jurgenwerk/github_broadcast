@@ -39,7 +39,7 @@ daemonize true
 
 # Store the pid of the server in the file at “path”.
 #
-pidfile '/apps/github_broadcast/shared/tmp/pids/puma.pid'
+pidfile '/apps/github_broadcast/shared/pids/puma.pid'
 
 # Use “path” as the file to store the server info state. This is
 # used by “pumactl” to query and control the server.
