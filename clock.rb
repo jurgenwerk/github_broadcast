@@ -1,3 +1,4 @@
+$LOAD_PATH << File.expand_path(File.join(File.dirname(__FILE__), '.'))
 require 'clockwork'
 require './config/boot'
 require './config/environment'
