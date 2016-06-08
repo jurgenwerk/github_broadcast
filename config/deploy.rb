@@ -13,13 +13,13 @@ require 'mina-extras/rvm'
 #   branch       - Branch name to deploy. (needed by mina/git)
 
 set :domain, '107.170.130.44'
-set :deploy_to, 'apps/github_broadcast'
-set :repository, 'https://github.com/matixmatix/github_broadcast/'
+set :deploy_to, '/apps/github_broadcast'
+set :repository, "git@github.com:matixmatix/github_broadcast.git"
 set :branch, 'master'
 set :user, 'deploy'
+set :rails_env, 'production'
 
-# For system-wide RVM install.
-#   set :rvm_path, '/usr/local/rvm/bin/rvm'
+set :rvm_path, '/usr/local/rvm/bin/rvm'
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
@@ -33,12 +33,7 @@ set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'log']
 # This task is the environment that is loaded for most commands, such as
 # `mina deploy` or `mina rake`.
 task :environment do
-  # If you're using rbenv, use this to load the rbenv environment.
-  # Be sure to commit your .ruby-version or .rbenv-version to your repository.
-  # invoke :'rbenv:load'
-
-  # For those using RVM, use this to load an RVM version@gemset.
-  # invoke :'rvm:use[ruby-1.9.3-p125@default]'
+  invoke :'rvm:use[ruby-2.3.0@default]'
 end
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
