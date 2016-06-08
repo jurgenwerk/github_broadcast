@@ -10,6 +10,7 @@ gem 'clockwork'
 gem 'puma'
 gem 'redis'
 gem 'rack-cors', require: 'rack/cors'
+gem 'daemons'
 
 group :development do
   gem 'pry'
