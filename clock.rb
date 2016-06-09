@@ -9,7 +9,7 @@ module Clockwork
     CommitFetcher.fetch_and_save
   end
 
-  every(7.seconds, "[#{DateTime.now.to_s}] Resolve locations") do
+  every(5.seconds, "[#{DateTime.now.to_s}] Resolve locations") do
     CommitFetcher.resolve_locations
   end
 
