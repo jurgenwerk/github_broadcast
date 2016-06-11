@@ -5,7 +5,7 @@ class RadarChannel < ApplicationCable::Channel
   end
 
   def save_location(location_params)
-    location = location_params["location_name"]
+    location_name = location_params["location_name"]
     latitude = location_params["latitude"]
     longitude = location_params["longitude"]
     author = location_params["author"]
