@@ -11,11 +11,11 @@ class RadarChannel < ApplicationCable::Channel
     author = location_params["author"]
 
     if location_name && !Location.where(name: location_name).first
-      Location.create(name: location, longitude: longitude, latitude: latitude)
+      Location.create(name: location_name, longitude: longitude, latitude: latitude)
     end
 
     if author && !Author.where(name: author).first
-      Author.create(name: author, location: location, latitude: latitude, longitude: longitude)
+      Author.create(name: author, location: location_name, latitude: latitude, longitude: longitude)
     end
   end
 end
