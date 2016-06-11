@@ -18,7 +18,7 @@ class Commit
 
   def publish
     if resolved && author_location && author_location_changed?
-      obj = attributes.slice(:event_id, :author_location, :commit_time, :latitude, :longitude)
+      obj = attributes.slice(:event_id, :author_location, :commit_time, :latitude, :longitude, :author)
       ActionCable.server.broadcast("radar_channel", obj)
     end
   end
