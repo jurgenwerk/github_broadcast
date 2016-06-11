@@ -130,3 +130,5 @@ production:
       database: github_broadcast_production
       hosts:
         - localhost:27017
+      options:
+        max_pool_size: 30
