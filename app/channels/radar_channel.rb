@@ -5,10 +5,17 @@ class RadarChannel < ApplicationCable::Channel
   end
 
   def save_location(location_params)
-    name = location_params["name"]
+    location = location_params["location_name"]
     latitude = location_params["latitude"]
     longitude = location_params["longitude"]
-    return if name && Location.where(name: name).first
-    Location.create(name: name, longitude: longitude, latitude: latitude)
+    author = location_params["author"]
+
+    if location_name && !Location.where(name: location_name).first
+      Location.create(name: location, longitude: longitude, latitude: latitude)
+    end
+
+    if author && !Author.where(name: author).first
+      Author.create(name: author, location: location, latitude: latitude, longitude: longitude)
+    end
   end
 end
