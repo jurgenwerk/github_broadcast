@@ -13,7 +13,7 @@ module Clockwork
     CommitFetcher.resolve_locations
   end
 
-  every(2.seconds, "[#{DateTime.now.to_s}] Resolve locations") do
+  every(3.seconds, "[#{DateTime.now.to_s}] Resolve locations") do
     CommitFetcher.resolve_locations
   end
 

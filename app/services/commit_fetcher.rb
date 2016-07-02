@@ -14,7 +14,7 @@ class CommitFetcher
   end
 
   def self.resolve_locations
-    commits = Commit.where(resolving_location: false, resolved: false).order_by(created_at: :desc).take(4)
+    commits = Commit.where(resolving_location: false, resolved: false).order_by(created_at: :desc).take(2)
     commits.each do |commit|
       commit.update(resolving_location: true)
       ResolveLocationJob.perform_later(commit.event_id)
