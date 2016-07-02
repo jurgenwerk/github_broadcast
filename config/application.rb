@@ -3,6 +3,7 @@ require File.expand_path('../boot', __FILE__)
 require "active_model/railtie"
 require "active_job/railtie"
 require "action_controller/railtie"
+require "active_record/railtie"
 require "action_cable/engine"
 
 # Require the gems listed in Gemfile, including any gems
@@ -19,8 +20,5 @@ module GithubBroadcast
         resource '*', :headers => :any, :methods => [:get, :post, :options]
       end
     end
-
-    Mongoid.logger.level = Logger::ERROR
-    Mongo::Logger.logger.level = Logger::ERROR
   end
 end

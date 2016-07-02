@@ -27,5 +27,7 @@ class ResolveLocationJob < ActiveJob::Base
         commit.update(resolving_location: false, resolved: true, author_location: location, latitude: latitude, longitude: longitude)
       end
     end
+
+    commit.publish
   end
 end
