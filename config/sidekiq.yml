@@ -1,7 +1,7 @@
 ---
-:concurrency: 10
+:concurrency: 20
 :pidfile: tmp/pids/sidekiq.pid
 production:
-  :concurrency: 10
+  :concurrency: 20
 :queues:
   - resolving
