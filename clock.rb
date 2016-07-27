@@ -5,7 +5,7 @@ require 'sidekiq/api'
 
 module Clockwork
 
-  every(5.seconds, "[#{DateTime.now.to_s}] Fetching commits") do
+  every(4.seconds, "[#{DateTime.now.to_s}] Fetching commits") do
     CommitFetcher.fetch_and_save
   end
 
@@ -22,6 +22,11 @@ module Clockwork
   end
 
   every(1.minute, "[#{DateTime.now.to_s}] Clear queue") do
+    Sidekiq::Queue.new("resolving").clear
+  end
+
+  every(1.day, "[#{DateTime.now.to_s}] Clear stale commits") do
+    CommitFetcher.cleanup
     Sidekiq::Queue.new("resolving").clear
   end
 end
