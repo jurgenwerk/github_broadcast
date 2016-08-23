@@ -17,6 +17,10 @@ module Clockwork
     CommitFetcher.resolve_locations
   end
 
+  every(7.seconds, "[#{DateTime.now.to_s}] Resolve locations") do
+    CommitFetcher.resolve_locations
+  end
+
   every(30.seconds, "[#{DateTime.now.to_s}] Fetching commits") do
     CommitFetcher.delete_old
   end

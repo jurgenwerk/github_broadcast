@@ -5,7 +5,7 @@ class Commit < ApplicationRecord
       ActionCable.server.broadcast("radar_channel", obj)
 
       # Temporary for gathering test data
-      Result.create(strategy_id: 3)
+      Result.create(strategy_id: 4)
 
       puts "published #{obj}"
     end
