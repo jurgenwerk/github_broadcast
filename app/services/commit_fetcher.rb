@@ -10,7 +10,7 @@ class CommitFetcher
 
   def self.delete_old
     # Leave a few (with offset) so available work doesn't fall to 0
-    Commit.where(resolving_location: false, resolved: false).offset(20).delete_all
+    Commit.where(id: Commit.where(resolving_location: false, resolved: false).offset(20).pluck(:id)).delete_all
     Commit.where(resolved: true, author_location: nil).delete_all
   end
 

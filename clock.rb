@@ -5,7 +5,7 @@ require 'sidekiq/api'
 
 module Clockwork
 
-  every(3.seconds, "[#{DateTime.now.to_s}] Fetching commits") do
+  every(4.seconds, "[#{DateTime.now.to_s}] Fetching commits") do
     CommitFetcher.fetch_and_save
   end
 
