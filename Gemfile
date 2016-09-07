@@ -10,7 +10,6 @@ gem 'puma'
 gem 'redis'
 gem 'rack-cors', require: 'rack/cors'
 gem 'daemons'
-gem 'slack-notifier'
 
 group :development do
   gem 'pry'
