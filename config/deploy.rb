@@ -5,6 +5,7 @@ require 'mina/rvm'
 require 'mina-extras/puma'
 require 'mina_sidekiq/tasks'
 require 'mina-extras/rvm'
+require 'mina/dotenv'
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
@@ -18,7 +19,6 @@ set :repository, "git@github.com:matixmatix/github_broadcast.git"
 set :branch, 'master'
 set :user, 'deploy'
 set :rails_env, 'production'
-
 set :rvm_path, '/usr/local/rvm/bin/rvm'
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
@@ -62,6 +62,12 @@ task :setup => :environment do
   end
 end
 
+desc "Start scheduling."
+task :restart_scheduling do
+  queue! "pkill -f clockworkd || true"
+  queue! "RAILS_ENV=production bundle exec clockworkd -c clock.rb start --log RAILS_ENV=production"
+end
+
 desc "Deploys the current version to the server."
 task :deploy => :environment do
   to :before_hook do
@@ -71,6 +77,7 @@ task :deploy => :environment do
     invoke :'sidekiq:quiet'
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
+    invoke :'dotenv:push'
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
     invoke :'deploy:cleanup'
@@ -80,6 +87,7 @@ task :deploy => :environment do
       queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
       invoke :'puma:restart'
       invoke :'sidekiq:restart'
+      invoke :restart_scheduling
     end
   end
 end

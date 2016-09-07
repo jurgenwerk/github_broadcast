@@ -17,5 +17,6 @@ group :development do
   gem 'meta_request'
   gem 'mina'
   gem 'mina-extras'
+  gem 'mina-dotenv'
   gem 'mina-sidekiq'
 end

@@ -87,8 +87,13 @@ GEM
     mina (0.3.8)
       open4 (~> 1.3.4)
       rake
+    mina-dotenv (0.2.2)
+      mina
+      mina-scp
+      thor
     mina-extras (0.0.9)
       mina
+    mina-scp (0.1.2)
     mina-sidekiq (0.4.0)
       mina
     mini_portile2 (2.0.0)
@@ -178,6 +183,7 @@ DEPENDENCIES
   github_api
   meta_request
   mina
+  mina-dotenv
   mina-extras
   mina-sidekiq
   pg
